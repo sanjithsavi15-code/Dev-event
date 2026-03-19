@@ -39,7 +39,7 @@ export default function RootLayout({
             {/* 1. The Background Layer */}
             <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
                 <Grainient
-                    color1="#F1DDCF"
+                    color1="#00FFCC"
                     color2="#00CC99"
                     color3="#008080"
                     timeSpeed={0.5}

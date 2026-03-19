@@ -180,7 +180,7 @@
   }
 
   #event-card {
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-10;
 
     .poster {
       @apply h-[300px] w-full rounded-lg object-cover;

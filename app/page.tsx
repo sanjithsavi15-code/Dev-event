@@ -1,13 +1,9 @@
 import React from 'react'
 import ExploreBtn from "@/components/ExploreBtn";
 import EventCard from "@/components/EventCard";
+import {events} from "@/lib/constants";
 
-const event =[
-    {image:'/images/event1.png', title:'Event 1', slug:'event-1', location:'location-1', date:'date-1', time:'time=1'},
-    {image:'/images/event2.png', title:'Event 2'},
-]
-
-const home = () => {
+const Home = () => {
     return (
         <section>
             <h1 className="text-center">The Hub For Dev <br/>Events You Can't Miss </h1>
@@ -15,18 +11,19 @@ const home = () => {
             <ExploreBtn />
             <div className="mt-20 space-y-7">
                 <h3>Featured Events</h3>
-                <ul className="event">
-                    {event.map((event) => (
+
+                {/* Removed 'event' from the className below */}
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {events.map((event) => (
                         <li key={event.slug}>
                             <EventCard {...event} />
                         </li>
-
-                        ))}
+                    ))}
                 </ul>
+
             </div>
         </section>
-
     )
 }
 
-export default home
+export default Home

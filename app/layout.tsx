@@ -4,6 +4,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Grainient from "@/components/Grainient";
 import Navbar from "@/components/Navbar";
+import { PostHogProvider } from "./providers";
+import PostHogPageView from "./PostHogPageView";
+import { Suspense } from "react";
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -30,6 +33,8 @@ export default function RootLayout({
     return (
         <html lang="en" className={cn("font-sans", geist.variable)} suppressHydrationWarning>
         <body className={`${schibstedGrotesk.variable} ${martianMono.variable} antialiased`}>
+        <PostHogProvider>
+        <Suspense fallback={null}><PostHogPageView /></Suspense>
         <Navbar />
 
 
@@ -71,6 +76,7 @@ export default function RootLayout({
                 </main>
             </div>
         </div>
+        </PostHogProvider>
         </body>
         </html>
     );

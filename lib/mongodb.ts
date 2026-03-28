@@ -10,7 +10,7 @@ declare global {
 }
 
 // MongoDB connection string from environment variables
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
   throw new Error(
@@ -46,7 +46,8 @@ async function connectDB(): Promise<mongoose.Connection> {
       bufferCommands: false, // Disable command buffering for better error handling
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGODB_URI,
+        opts).then((mongoose) => {
       return mongoose.connection;
     });
   }

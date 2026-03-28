@@ -115,7 +115,7 @@ EventSchema.index({ slug: 1 }, { unique: true });
  * - Validates and normalizes date to ISO format
  * - Ensures time is stored consistently
  */
-EventSchema.pre('save', async function (next) {
+EventSchema.pre('save', async function () {
   const event = this as IEvent;
 
   // Generate slug from title if title is modified or new document
@@ -150,7 +150,7 @@ EventSchema.pre('save', async function (next) {
       }
       event.date = parsedDate.toISOString().split('T')[0]; // Store as YYYY-MM-DD
     } catch (error) {
-      return next(new Error('Date must be a valid date string'));
+      throw new Error('Date must be a valid date string');
     }
   }
 
@@ -158,11 +158,9 @@ EventSchema.pre('save', async function (next) {
   if (event.isModified('time')) {
     const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     if (!timeRegex.test(event.time)) {
-      return next(new Error('Time must be in HH:MM format (24-hour)'));
+      throw new Error('Time must be in HH:MM format (24-hour)');
     }
   }
-
-  next();
 });
 
 // Prevent model recompilation in development
